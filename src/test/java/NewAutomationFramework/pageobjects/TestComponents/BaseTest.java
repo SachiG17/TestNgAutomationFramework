@@ -46,7 +46,7 @@ public class BaseTest {
         driver.manage().window().maximize();
         return driver;
     }
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public HomePage launchApplication() throws IOException {
         driver = initializeDriver();
         homePage = new HomePage(driver);
@@ -54,7 +54,7 @@ public class BaseTest {
         return homePage;
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void Teardown(){
         driver.close();
     }

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(groups = {"LogInMatrix"})
     public void LogInTest() throws IOException {
         homePage = new HomePage(driver);
         homePage.clickSignInBtn();

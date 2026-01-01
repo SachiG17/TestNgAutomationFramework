@@ -44,6 +44,14 @@ public class HomePage {
     @FindBy(xpath = "//b[contains(text(),'Account Deleted!')]")
     WebElement DeleteMsg;
 
+    @FindBy(xpath = "//a[contains(text(),'Products')]")
+    WebElement ProductBtn;
+
+    @FindBy(xpath = "//a[contains(text(),'Cart')]")
+    WebElement CartBtn;
+
+
+
 
     public void goTo(){
         driver.get("https://automationexercise.com/");
@@ -74,5 +82,13 @@ public class HomePage {
 
     public void verifyProfileDeleted(){
         Assert.assertEquals(DeleteMsg.getText(),"ACCOUNT DELETED!");
+    }
+
+    public void openProductPage(){
+        ProductBtn.click();
+    }
+
+    public void openCart(){
+        CartBtn.click();
     }
 }
