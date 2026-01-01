@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite parallel = "tests" name="All Test Suite">
+    <test thread-count="5"  name="C:/Users/Sachin/IdeaProjects/NewAutomationFramework">
+        <classes>
+            <class name="NewAutomationFramework.Tests.IncorrectLoginTest">
+                <methods>
+                    <include name="IncorrectLoginTest"/>
+                </methods>
+            </class>
+            <class name="NewAutomationFramework.Tests.LoginTest">
+                <methods>
+                    <include name="LogInTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Product Tests" thread-count="5">
+        <classes>
+            <class name="NewAutomationFramework.Tests.ProductTest">
+                <methods>
+                    <include name="AddProductandVerify"/>
+                </methods>
+            </class>
+            <class name="NewAutomationFramework.Tests.UserRegistrationTest">
+                <methods>
+                    <include name="RegisterDeleteUserTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
