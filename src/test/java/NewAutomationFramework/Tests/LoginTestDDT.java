@@ -6,20 +6,23 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 public class LoginTestDDT extends BaseTest {
 
     @Test(dataProvider ="getData",groups = "LogInMatrix")
-    public void LogInTest(String email,String password) throws IOException {
+    public void LogInTest(HashMap<String,String> input) throws IOException {
         homePage = new HomePage(driver);
         homePage.clickSignInBtn();
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.logIn(email,password);
+        loginPage.logIn(input.get("email"),input.get("password"));
         homePage.verifyLoggedIn();
         homePage.logOut();
     }
     @DataProvider
-    public Object[][] getData(){
-        return new Object[][]{{"sachinshetty@gmail.com","shettysachin"},{"sachinshetty@gmail.com","shettysachin1"}};
+    public Object[][] getData() throws IOException {
+        List<HashMap<String,String>> data = getJsonDataToMap(System.getProperty("user.dir")+"//src//test//java//NewAutomationFramework//Data//MultipleLoginDetails.json");
+        return new Object[][] {{data.get(0)},{data.get(1)}};
     }
 }

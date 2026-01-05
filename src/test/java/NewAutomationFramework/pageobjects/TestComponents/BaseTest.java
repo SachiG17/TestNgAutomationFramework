@@ -1,6 +1,9 @@
 package NewAutomationFramework.pageobjects.TestComponents;
 
 import NewAutomationFramework.pageobjects.HomePage;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,10 +12,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 public class BaseTest {
@@ -52,6 +57,14 @@ public class BaseTest {
         homePage = new HomePage(driver);
         homePage.goTo();
         return homePage;
+    }
+
+    public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws  IOException{
+        String jsonContent = FileUtils.readFileToString(new File(filePath));
+        ObjectMapper mapper = new ObjectMapper();
+        List<HashMap<String,String>> data = mapper.readValue(jsonContent, new TypeReference<List<HashMap<String, String>>>(){
+    });
+        return data;
     }
 
     @AfterClass(alwaysRun = true)
