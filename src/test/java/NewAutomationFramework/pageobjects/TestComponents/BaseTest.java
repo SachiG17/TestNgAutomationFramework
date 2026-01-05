@@ -9,7 +9,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.io.File;
@@ -63,7 +62,7 @@ public class BaseTest {
     public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws  IOException{
         String jsonContent = FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
         ObjectMapper mapper = new ObjectMapper();
-        List<HashMap<String,String>> data = mapper.readValue(jsonContent, new TypeReference<List<HashMap<String, String>>>(){
+        List<HashMap<String,String>> data = mapper.readValue(jsonContent, new TypeReference<>(){
     });
         return data;
     }
