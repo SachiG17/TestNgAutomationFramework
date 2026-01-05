@@ -15,6 +15,7 @@ import org.testng.annotations.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.Properties;
 public class BaseTest {
     public WebDriver driver;
     public HomePage homePage;
-    public WebDriverWait wait;
+
 
     public WebDriver initializeDriver() throws IOException {
         //properties class
@@ -60,7 +61,7 @@ public class BaseTest {
     }
 
     public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws  IOException{
-        String jsonContent = FileUtils.readFileToString(new File(filePath));
+        String jsonContent = FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
         ObjectMapper mapper = new ObjectMapper();
         List<HashMap<String,String>> data = mapper.readValue(jsonContent, new TypeReference<List<HashMap<String, String>>>(){
     });
