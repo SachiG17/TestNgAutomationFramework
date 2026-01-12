@@ -13,25 +13,29 @@ import java.io.IOException;
 
 public class Listeners extends BaseTest implements ITestListener {
     ExtentReports extent = ExtentReporterNG.getReportObject();
-    ExtentTest test;
+    /// While Running Concurrently We will create new Object
+    ThreadLocal<ExtentTest> extentTest = new ThreadLocal();
+
     WebDriver driver;
     @Override
     public void onTestStart(ITestResult result){
-        test = extent.createTest(result.getMethod().getMethodName());
+        ExtentTest test = extent.createTest(result.getMethod().getMethodName());
+        //will assign new thread for this above test
+        extentTest.set(test);
     }
 
 
     @Override
     public void onTestSuccess(ITestResult result){
-        test.log(Status.PASS, "Test Passed");
+        extentTest.get().log(Status.PASS, "Test Passed");
     }
 
     @Override
     public void onTestFailure(ITestResult result){
-        //if Failes it prints Test Failed
-        test.log(Status.FAIL, "Test Failed");
+        //if Fails it prints Test Failed
+        extentTest.get().log(Status.FAIL, "Test Failed");
         //Prints error message
-        test.fail(result.getThrowable());
+        extentTest.get().fail(result.getThrowable());
         try {
             //get driver info
             driver = (WebDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
@@ -42,21 +46,21 @@ public class Listeners extends BaseTest implements ITestListener {
 
         //attach to Report
 
-        String filepath=null;
+        String filepath = null;
         try {
             //filepath(local path) represent where the screenshot is saved
-            filepath = getScreenshot(result.getMethod().getMethodName());
+            filepath = getScreenshot(result.getMethod().getMethodName(),driver);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-        //take path from local system attch to extent rport
-        test.addScreenCaptureFromPath(filepath,result.getMethod().getMethodName());
+        //take path from local system attach to extent rport
+        extentTest.get().addScreenCaptureFromPath(filepath,result.getMethod().getMethodName());
         }
 
     @Override
     public void onTestSkipped(ITestResult result){
-        test.log(Status.PASS, "Test Skipped");
+        extentTest.get().log(Status.SKIP, "Test Skipped");
     }
 
     @Override

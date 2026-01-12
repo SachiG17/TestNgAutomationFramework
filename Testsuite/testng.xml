@@ -3,6 +3,7 @@
 <suite  name="All Test Suite">
     <listeners>
         <listener class-name="NewAutomationFramework.pageobjects.TestComponents.Listeners"/>
+        <listener class-name="NewAutomationFramework.pageobjects.TestComponents.RetryTransformer"/>
     </listeners>
     <test thread-count="5"  name="C:/Users/Sachin/IdeaProjects/NewAutomationFramework">
         <classes>

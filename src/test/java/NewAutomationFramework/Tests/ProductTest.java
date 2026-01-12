@@ -1,10 +1,7 @@
 package NewAutomationFramework.Tests;
-
-import NewAutomationFramework.pageobjects.CartPage;
 import NewAutomationFramework.pageobjects.HomePage;
 import NewAutomationFramework.pageobjects.ProductPage;
 import NewAutomationFramework.pageobjects.TestComponents.BaseTest;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

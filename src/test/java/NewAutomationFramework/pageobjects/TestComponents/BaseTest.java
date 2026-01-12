@@ -54,7 +54,7 @@ public class BaseTest {
         return driver;
     }
 
-    public String getScreenshot(String testCase) throws IOException {
+    public String getScreenshot(String testCase,WebDriver driver) throws IOException {
         TakesScreenshot tc = (TakesScreenshot) driver;
         File Source = tc.getScreenshotAs(OutputType.FILE);
         File file = new File(System.getProperty("user.dir")+"//Screenshots"+testCase+".png");
